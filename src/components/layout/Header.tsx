@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { SITE_NAME, NAV_LINKS } from '@/lib/constants'
+import { NAV_LINKS } from '@/lib/constants'
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -16,16 +16,18 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? 'bg-[#1A1A2E]/95 backdrop-blur-sm shadow-lg py-3' : 'bg-transparent py-6'
+        scrolled
+          ? 'bg-[#8AACBE]/95 backdrop-blur-sm shadow-md py-3'
+          : 'bg-[#8AACBE]/80 backdrop-blur-sm py-6'
       }`}
     >
       <div className="max-w-5xl mx-auto px-6 flex items-center justify-between">
         <a
           href="#accueil"
-          className="text-white font-light tracking-widest text-lg"
+          className="font-light tracking-widest text-lg text-white italic"
           style={{ fontFamily: 'Georgia, serif' }}
         >
-          <span className="text-[#C9A237]">L&apos;</span>Appel des Sens
+          <span className="text-[#C9A237] not-italic">L&apos;</span>Appel des Sens
         </a>
 
         {/* Desktop nav */}
@@ -34,7 +36,7 @@ export default function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="text-white/80 hover:text-[#C9A237] text-sm tracking-widest uppercase transition-colors duration-200"
+              className="text-white/90 hover:text-[#C9A237] text-sm tracking-widest uppercase transition-colors duration-200 font-medium"
             >
               {link.label}
             </a>
@@ -55,12 +57,12 @@ export default function Header() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <nav className="md:hidden bg-[#1A1A2E] border-t border-[#C9A237]/20 px-6 py-4 flex flex-col gap-4">
+        <nav className="md:hidden bg-[#8AACBE] border-t border-white/20 px-6 py-4 flex flex-col gap-4">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-white/80 hover:text-[#C9A237] text-sm tracking-widest uppercase transition-colors"
+              className="text-white/90 hover:text-[#C9A237] text-sm tracking-widest uppercase transition-colors"
               onClick={() => setMenuOpen(false)}
             >
               {link.label}
