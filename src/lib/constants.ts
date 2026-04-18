@@ -1,4 +1,4 @@
-import type { Service, ContactInfo, NavLink } from '@/types'
+import type { Service, Pack, ContactInfo, NavLink } from '@/types'
 
 export const SITE_NAME = "L'Appel des Sens"
 
@@ -10,24 +10,38 @@ export const CONTACT: ContactInfo = {
 export const NAV_LINKS: NavLink[] = [
   { label: 'Accueil', href: '#accueil' },
   { label: 'Services', href: '#services' },
+  { label: 'Tarifs', href: '#tarifs' },
   { label: 'À propos', href: '#apropos' },
   { label: 'Contact', href: '#contact' },
 ]
 
 export const SERVICES: Service[] = [
   {
-    id: 'scan',
-    title: 'Scan Énergétique',
+    id: 'magnetisme',
+    title: 'Magnétisme / Rééquilibrage énergétique',
     description:
-      "Évaluation complète de votre champ énergétique pour identifier les blocages et déséquilibres qui affectent votre bien-être.",
-    icon: '◈',
+      "Soin énergétique par le magnétisme pour soulager les douleurs, réduire le stress et rétablir la circulation de l'énergie vitale.",
+    icon: '⊕',
+    duration: '1h',
+    price: 60,
   },
   {
-    id: 'reiki',
-    title: 'Reïki',
+    id: 'scan',
+    title: 'Scanner énergétique + analyse',
     description:
-      "Technique de soin par imposition des mains qui canalise l'énergie universelle pour favoriser la guérison naturelle du corps et de l'esprit.",
+      "Évaluation complète de votre champ énergétique pour identifier les blocages et déséquilibres, suivie d'une analyse détaillée.",
+    icon: '◈',
+    duration: '1h',
+    price: 120,
+  },
+  {
+    id: 'soins-specifiques',
+    title: 'Soins spécifiques',
+    description:
+      "Soins ciblés pour des problématiques précises : coupe feu, verrues, et autres affections nécessitant une intervention énergétique spécifique.",
     icon: '✦',
+    duration: '1h',
+    price: 50,
   },
   {
     id: 'lithotherapie',
@@ -35,12 +49,31 @@ export const SERVICES: Service[] = [
     description:
       "Utilisation des propriétés vibratoires des pierres et cristaux pour harmoniser les centres énergétiques et soutenir votre équilibre intérieur.",
     icon: '◇',
+    duration: '1h30',
+    price: 70,
   },
   {
-    id: 'magnetisme',
-    title: 'Magnétisme',
+    id: 'passeur-ame',
+    title: "Accompagnement passeur d'âme",
     description:
-      "Soin énergétique par le magnétisme pour soulager les douleurs, réduire le stress et rétablir la circulation de l'énergie vitale.",
-    icon: '⊕',
+      "Accompagnement doux et bienveillant pour traverser les transitions de vie, les deuils ou les moments de transformation profonde.",
+    icon: '◉',
+    duration: '1h',
+    price: 70,
+  },
+]
+
+export const PACKS: Pack[] = [
+  {
+    id: 'pack-magnetisme',
+    title: '3 séances magnétisme',
+    description: 'Idéal pour un suivi en profondeur et des résultats durables.',
+    price: 160,
+  },
+  {
+    id: 'pack-scanner',
+    title: 'Scanner + magnétisme',
+    description: 'Commencez par un bilan complet suivi d\'une séance de soin.',
+    price: 170,
   },
 ]

@@ -3,6 +3,15 @@ export interface Service {
   title: string
   description: string
   icon: string
+  duration: string
+  price: number
+}
+
+export interface Pack {
+  id: string
+  title: string
+  description: string
+  price: number
 }
 
 export interface ContactInfo {
