@@ -1,10 +1,13 @@
 'use client'
 
+import { useState } from 'react'
 import { useCart } from '@/context/CartContext'
 import { CONTACT } from '@/lib/constants'
 
 export default function CartPanel() {
   const { items, removeItem, updateQuantity, clearCart, total, count } = useCart()
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const cartMessage = items
     .map((i) => `${i.quantity}x ${i.title} (${i.price * i.quantity} €)`)
@@ -13,6 +16,28 @@ export default function CartPanel() {
   const emailHref = items.length > 0
     ? `mailto:${CONTACT.email}?subject=Demande de réservation — L'Appel des Sens&body=Bonjour Victor,%0A%0AJe souhaite réserver :%0A${encodeURIComponent(cartMessage)}%0A%0ATotal estimé : ${total} €%0A%0ACordialement,`
     : `mailto:${CONTACT.email}`
+
+  async function handleCheckout() {
+    setLoading(true)
+    setError(null)
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items }),
+      })
+      const data = await res.json()
+      if (data.url) {
+        window.location.href = data.url
+      } else {
+        setError(data.error ?? 'Une erreur est survenue.')
+      }
+    } catch {
+      setError('Impossible de se connecter au serveur de paiement.')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div className="border-2 border-[#C9A237]/30">
@@ -81,23 +106,44 @@ export default function CartPanel() {
       {items.length > 0 && (
         <>
           <div className="px-5 py-4 border-t-2 border-[#C9A237]/30 bg-[#C9A237]/5 flex items-center justify-between">
-            <span className="text-[#1A1A2E] text-xs font-semibold tracking-widest uppercase">Total estimé</span>
+            <span className="text-[#1A1A2E] text-xs font-semibold tracking-widest uppercase">Total</span>
             <span className="text-[#C9A237] text-2xl font-light" style={{ fontFamily: 'Georgia, serif' }}>
               {total} €
             </span>
           </div>
-          <div className="px-5 pb-5 pt-3 space-y-2">
+          <div className="px-5 pb-5 pt-4 space-y-3">
+            {/* Paiement en ligne */}
+            <button
+              type="button"
+              onClick={handleCheckout}
+              disabled={loading}
+              className="flex items-center justify-center gap-2 w-full py-3 bg-[#C9A237] text-[#1A1A2E] hover:bg-[#E8C96A] transition-colors font-semibold tracking-widest uppercase text-xs disabled:opacity-60 disabled:cursor-wait"
+            >
+              {loading ? (
+                <span className="animate-pulse">Chargement...</span>
+              ) : (
+                <><span>💳</span> Payer en ligne</>
+              )}
+            </button>
+
+            {error && (
+              <p className="text-red-500 text-xs text-center">{error}</p>
+            )}
+
+            <div className="flex items-center gap-3">
+              <div className="h-px flex-1 bg-[#C9A237]/20" />
+              <span className="text-[#1A1A2E]/30 text-xs">ou</span>
+              <div className="h-px flex-1 bg-[#C9A237]/20" />
+            </div>
+
             <a href={`tel:${CONTACT.phone.replace(/\s/g, '')}`}
-              className="flex items-center justify-center gap-2 w-full py-3 bg-[#C9A237] text-[#1A1A2E] hover:bg-[#E8C96A] transition-colors font-semibold tracking-widest uppercase text-xs">
+              className="flex items-center justify-center gap-2 w-full py-3 border-2 border-[#C9A237] text-[#C9A237] hover:bg-[#C9A237] hover:text-[#1A1A2E] transition-colors font-semibold tracking-widest uppercase text-xs">
               <span>◎</span> Appeler
             </a>
             <a href={emailHref}
-              className="flex items-center justify-center gap-2 w-full py-3 border-2 border-[#C9A237] text-[#C9A237] hover:bg-[#C9A237] hover:text-[#1A1A2E] transition-colors font-semibold tracking-widest uppercase text-xs">
-              <span>✉</span> Envoyer ma sélection
+              className="flex items-center justify-center gap-2 w-full py-3 border border-[#C9A237]/40 text-[#1A1A2E]/60 hover:border-[#C9A237] hover:text-[#C9A237] transition-colors font-semibold tracking-widest uppercase text-xs">
+              <span>✉</span> Envoyer par email
             </a>
-            <p className="text-[#1A1A2E]/35 text-xs text-center italic" style={{ fontFamily: 'Georgia, serif' }}>
-              L&apos;email sera pré-rempli avec votre sélection
-            </p>
           </div>
         </>
       )}
