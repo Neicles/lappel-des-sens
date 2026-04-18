@@ -4,7 +4,7 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 
 export const metadata: Metadata = {
-  title: "L'Appel des Sens — Victor Boursier",
+  title: "L'Appel des Sens — Victor Bourcier",
   description:
     "Praticien en soins énergétiques (magnétisme) — Scan énergétique, Reïki, Lithothérapie, Magnétisme. Séances en présentiel et à distance.",
 }

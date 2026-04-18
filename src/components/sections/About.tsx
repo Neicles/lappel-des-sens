@@ -5,7 +5,7 @@ export default function About() {
     <section id="apropos" className="py-20 px-6 bg-[#FAFAF8]">
       <div className="max-w-5xl mx-auto">
         <SectionTitle subtitle="Mon approche">
-          Victor Boursier
+          Victor Bourcier
         </SectionTitle>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">

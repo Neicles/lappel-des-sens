@@ -154,7 +154,7 @@ export default function Contact() {
               </p>
               <div className="flex items-center gap-3 justify-center mt-4">
                 <div className="h-px w-8 bg-[#C9A237]/40" />
-                <span className="text-[#C9A237] text-xs tracking-widest uppercase font-semibold">Victor Boursier</span>
+                <span className="text-[#C9A237] text-xs tracking-widest uppercase font-semibold">Victor Bourcier</span>
                 <div className="h-px w-8 bg-[#C9A237]/40" />
               </div>
             </div>

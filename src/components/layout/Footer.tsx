@@ -52,7 +52,7 @@ export default function Footer() {
 
         <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-2">
           <p className="text-xs">
-            © {new Date().getFullYear()} {SITE_NAME} — Victor Boursier
+            © {new Date().getFullYear()} {SITE_NAME} — Victor Bourcier
           </p>
           <p className="text-xs">Tous droits réservés</p>
         </div>
