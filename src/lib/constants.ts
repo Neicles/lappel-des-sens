@@ -10,9 +10,8 @@ export const CONTACT: ContactInfo = {
 export const NAV_LINKS: NavLink[] = [
   { label: 'Accueil', href: '#accueil' },
   { label: 'Services', href: '#services' },
-  { label: 'Tarifs', href: '#tarifs' },
   { label: 'À propos', href: '#apropos' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Tarifs & Réservation', href: '#contact' },
 ]
 
 export const SERVICES: Service[] = [
